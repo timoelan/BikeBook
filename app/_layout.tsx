@@ -1,18 +1,28 @@
-import React from 'react';
+import { BikeDataProvider } from '@/context/BikeDataContext';
+import { BikeProvider } from '@/context/BikeContext';
+import { LogProvider } from '@/context/LogContext';
+import { SpotProvider } from '@/context/SpotContext';
+import { ThemeProvider } from '@/context/ThemeContext';
 import { Stack } from 'expo-router';
-import { BikeProvider } from '../context/BikeContext';
-import { BikeDataProvider } from '../context/BikeDataContext';
 
 export default function RootLayout() {
-  return (
-    <BikeProvider>
-      <BikeDataProvider>
-        <Stack>
-          <Stack.Screen name="index" options={{ title: 'Meine Bikes' }} />
-          <Stack.Screen name="addBike" options={{ title: 'Bike hinzufügen' }} />
-          <Stack.Screen name="info" options={{ title: 'Bike Infos' }} />
-        </Stack>
-      </BikeDataProvider>
-    </BikeProvider>
-  );
+    return (
+        <ThemeProvider>
+            <BikeProvider>
+                <BikeDataProvider>
+                    <SpotProvider>
+                        <LogProvider>
+                            <Stack screenOptions={{ headerShown: false }}>
+                                <Stack.Screen name="(tabs)" />
+                                <Stack.Screen name="bike/[id]" options={{ presentation: 'modal' }} />
+                                <Stack.Screen name="addBike" options={{ presentation: 'modal', headerShown: true, title: 'Bike hinzufügen' }} />
+                                <Stack.Screen name="editBike" options={{ presentation: 'modal', headerShown: true, title: 'Bike bearbeiten' }} />
+                                <Stack.Screen name="info" options={{ presentation: 'modal', headerShown: true, title: 'Bike Infos' }} />
+                            </Stack>
+                        </LogProvider>
+                    </SpotProvider>
+                </BikeDataProvider>
+            </BikeProvider>
+        </ThemeProvider>
+    );
 }
