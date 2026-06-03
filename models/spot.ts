@@ -1,4 +1,4 @@
-export type SpotType = 'stunt' | 'foto' | 'kurve' | 'sonstig';
+export type SpotType = 'stunt' | 'foto' | 'kurve' | 'ladestation' | 'sonstig';
 
 export interface Spot {
     id: string;

@@ -11,10 +11,11 @@ import {
 import MapView, { Callout, Marker, Region } from 'react-native-maps';
 
 const SPOT_ICONS: Record<SpotType, { icon: string; color: string }> = {
-    stunt: { icon: '🤸', color: '#FF9500' },
-    foto:  { icon: '📸', color: '#0A84FF' },
-    kurve: { icon: '🏍️', color: '#30D158' },
-    sonstig: { icon: '📍', color: '#BF5AF2' },
+    stunt:       { icon: '🤸', color: '#FF9500' },
+    foto:        { icon: '📸', color: '#0A84FF' },
+    kurve:       { icon: '🏍️', color: '#30D158' },
+    ladestation: { icon: '⚡', color: '#FFD60A' },
+    sonstig:     { icon: '📍', color: '#BF5AF2' },
 };
 
 export default function MapTab() {
@@ -209,12 +210,12 @@ const styles = (theme: ReturnType<typeof import('@/context/ThemeContext').useThe
     legendIcon: { fontSize: 14 },
     legendLabel: { fontSize: 12, color: theme.subtext, fontWeight: '500', textTransform: 'capitalize' },
     markerBubble: {
-        width: 36, height: 36, borderRadius: 18,
+        width: 28, height: 28, borderRadius: 14,
         backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center',
-        shadowColor: '#000', shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3, shadowRadius: 3, elevation: 4,
+        shadowColor: '#000', shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.25, shadowRadius: 2, elevation: 3,
     },
-    markerIcon: { fontSize: 20 },
+    markerIcon: { fontSize: 14 },
     callout: { padding: 8, minWidth: 120 },
     calloutTitle: { fontWeight: '700', fontSize: 14, marginBottom: 2 },
     calloutType: { fontSize: 10, color: '#888', fontWeight: '600' },
