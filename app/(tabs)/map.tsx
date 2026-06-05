@@ -5,15 +5,15 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Location from 'expo-location';
 import { useEffect, useRef, useState } from 'react';
 import {
-    Alert, Modal, ScrollView, StyleSheet, Text,
-    TextInput, TouchableOpacity, View
+    Alert, KeyboardAvoidingView, Modal, Platform,
+    ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View
 } from 'react-native';
 import MapView, { Callout, Marker, Region } from 'react-native-maps';
 
 const SPOT_ICONS: Record<SpotType, { icon: string; color: string }> = {
-    stunt:       { icon: '🤸', color: '#FF9500' },
+    stunt:       { icon: '🏍️', color: '#FF9500' },
     foto:        { icon: '📸', color: '#0A84FF' },
-    kurve:       { icon: '🏍️', color: '#30D158' },
+    kurve:       { icon: '🏎️', color: '#30D158' },
     ladestation: { icon: '⚡', color: '#FFD60A' },
     sonstig:     { icon: '📍', color: '#BF5AF2' },
 };
@@ -145,7 +145,12 @@ export default function MapTab() {
 
             {/* Add spot modal */}
             <Modal visible={showModal} transparent animationType="slide">
+                <KeyboardAvoidingView
+                    style={{ flex: 1 }}
+                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                >
                 <View style={s.modalOverlay}>
+                    <ScrollView keyboardShouldPersistTaps="handled">
                     <View style={s.modalSheet}>
                         <Text style={s.modalTitle}>Neuer Spot</Text>
 
@@ -191,7 +196,9 @@ export default function MapTab() {
                             </TouchableOpacity>
                         </View>
                     </View>
+                    </ScrollView>
                 </View>
+                </KeyboardAvoidingView>
             </Modal>
         </View>
     );

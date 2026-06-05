@@ -5,6 +5,7 @@ import { LogEntry } from '@/models/logEntry';
 interface LogContextType {
     logs: LogEntry[];
     addLog: (log: LogEntry) => void;
+    updateLog: (id: string, updated: LogEntry) => void;
     removeLog: (id: string) => void;
     logsForBike: (bikeID: string) => LogEntry[];
 }
@@ -28,11 +29,12 @@ export function LogProvider({ children }: { children: React.ReactNode }) {
     }, [logs, loaded]);
 
     const addLog = (log: LogEntry) => setLogs(p => [...p, log]);
+    const updateLog = (id: string, updated: LogEntry) => setLogs(p => p.map(l => l.id === id ? updated : l));
     const removeLog = (id: string) => setLogs(p => p.filter(l => l.id !== id));
     const logsForBike = (bikeID: string) => logs.filter(l => l.bikeID === bikeID);
 
     return (
-        <LogContext.Provider value={{ logs, addLog, removeLog, logsForBike }}>
+        <LogContext.Provider value={{ logs, addLog, updateLog, removeLog, logsForBike }}>
             {children}
         </LogContext.Provider>
     );
